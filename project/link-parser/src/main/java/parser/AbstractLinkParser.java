@@ -4,16 +4,18 @@ import parser.result.LinkParsingResult;
 
 import java.util.Optional;
 
-public abstract class AbstractLinkParser {
-    protected final AbstractLinkParser nextHandler;
+public abstract class AbstractLinkParser implements LinkHandler {
 
-    protected AbstractLinkParser(AbstractLinkParser nextHandler) {
+    protected final LinkHandler nextHandler;
+
+    protected AbstractLinkParser(LinkHandler nextHandler) {
         this.nextHandler = nextHandler;
     }
 
     protected abstract Optional<LinkParsingResult> tryParse(String link);
 
-    protected LinkParsingResult parse(String link) {
+    @Override
+    public LinkParsingResult parse(String link) {
         return tryParse(link).orElse(nextHandler == null ? null : nextHandler.parse(link));
     }
 }

@@ -8,7 +8,9 @@ import java.util.Optional;
 
 public class StackOverflowLinkParser extends AbstractLinkParser {
 
-    protected StackOverflowLinkParser(AbstractLinkParser nextHandler) {
+    private static final String STACKOVERFLOW_LINK_PREFIX = "https://stackoverflow.com/questions/";
+
+    protected StackOverflowLinkParser(LinkHandler nextHandler) {
         super(nextHandler);
     }
 
@@ -16,7 +18,7 @@ public class StackOverflowLinkParser extends AbstractLinkParser {
     protected Optional<LinkParsingResult> tryParse(String link) {
         return LinkParserUtils.getLinkPathPartsSatisfyPrefix(
                         link,
-                        "https://stackoverflow.com/questions/"
+                        STACKOVERFLOW_LINK_PREFIX
                 )
                 .filter(arr -> arr.length > 0)
                 .map(arr -> arr[0])

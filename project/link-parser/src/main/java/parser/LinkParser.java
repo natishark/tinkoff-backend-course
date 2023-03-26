@@ -2,17 +2,23 @@ package parser;
 
 import parser.result.LinkParsingResult;
 
-public class LinkParser {
-    private final String link;
+import java.util.ArrayList;
+import java.util.List;
 
-    public LinkParser(String link) {
-        this.link = link;
+public class LinkParser {
+
+    private final LinkHandler entryHandler;
+
+    public LinkParser() {
+        List<LinkHandler> parserChain = new ArrayList<>();
+
+        parserChain.add(new GitHubLinkParser(null));
+        parserChain.add(new StackOverflowLinkParser(parserChain.get(parserChain.size() - 1)));
+
+        entryHandler = parserChain.get(parserChain.size() - 1);
     }
 
-    public LinkParsingResult parse() {
-        final var gitHubLinkParser = new GitHubLinkParser(null);
-        final var stackOverflowLinkParser = new StackOverflowLinkParser(gitHubLinkParser);
-
-        return stackOverflowLinkParser.parse(link);
+    public LinkParsingResult parse(final String link) {
+        return entryHandler.parse(link);
     }
 }
