@@ -10,13 +10,11 @@ public class ClientConfiguration {
 
     @Bean
     public GitHubClient gitHubClient() {
-        System.out.println("Created GitHubClient bean.");
         return new GitHubClient();
     }
 
     @Bean
     public StackOverflowClient stackOverflowClient() {
-        System.out.println("Created StackOverflowClient bean.");
         return new StackOverflowClient();
     }
 }

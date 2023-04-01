@@ -9,6 +9,9 @@ public class StackOverflowClient {
 
     private static final String BASE_STACKOVERFLOW_URL = "https://api.stackexchange.com/";
     private static final String API_VERSION = "2.3";
+    private static final String QUESTIONS_PATH = "questions";
+    private static final String SITE_QUERY_PARAM_NAME = "site";
+    private static final String SITE_QUERY_PARAM_VALUE = "stackoverflow";
 
     private final WebClient stackOverflowClient;
 
@@ -19,10 +22,6 @@ public class StackOverflowClient {
     public StackOverflowClient() {
         this(BASE_STACKOVERFLOW_URL);
     }
-
-    private static final String QUESTIONS_PATH = "questions";
-    private static final String SITE_QUERY_PARAM_NAME = "site";
-    private static final String SITE_QUERY_PARAM_VALUE = "stackoverflow";
 
     public Mono<QuestionResponse> getQuestionInformation(QuestionRequest request) {
         return stackOverflowClient

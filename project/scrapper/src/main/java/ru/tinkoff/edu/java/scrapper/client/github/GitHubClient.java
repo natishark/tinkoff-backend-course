@@ -14,6 +14,7 @@ public class GitHubClient {
     private static final String API_VERSION_HEADER_NAME = "X-GitHub-Api-Version";
     private static final String API_VERSION_HEADER_VALUE = "2022-11-28";
     private static final String ACCESS_TOKEN_PREFIX = "Bearer ";
+    private static final String REPOSITORIES_PATH = "repos";
 
     private final WebClient githubClient;
 
@@ -38,8 +39,6 @@ public class GitHubClient {
                 .defaultHeader(API_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE)
                 .build();
     }
-
-    private static final String REPOSITORIES_PATH = "repos";
 
     public Mono<RepositoryResponse> getRepositoryInformation(RepositoryRequest request) {
         return githubClient

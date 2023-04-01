@@ -1,0 +1,6 @@
+app:
+  test: arbitrary_value
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
