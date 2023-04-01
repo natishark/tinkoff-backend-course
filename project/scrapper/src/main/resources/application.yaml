@@ -1,0 +1,10 @@
+app:
+  test: arbitrary_value
+  scheduler:
+    interval: PT10S
+  githubCredentials:
+    githubToken: ${GITHUB_TOKEN}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
