@@ -2,6 +2,7 @@ package ru.tinkoff.edu.java.scrapper.controller.exception;
 
 import com.natishark.course.tinkoff.bot.dto.ApiErrorResponse;
 import com.natishark.course.tinkoff.bot.exception.GlobalExceptionHandler;
+import com.natishark.course.tinkoff.bot.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

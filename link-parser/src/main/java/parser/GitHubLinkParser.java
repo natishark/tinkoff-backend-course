@@ -17,11 +17,15 @@ public class GitHubLinkParser extends AbstractLinkParser {
     @Override
     protected Optional<LinkParsingResult> tryParse(String link) {
         return LinkParserUtils.getLinkPathPartsSatisfyPrefix(link, GITHUB_LINK_PREFIX)
-                .filter(arr -> arr.length > 1 && isValidGitHubId(arr[0]) && isValidGitHubId(arr[1]))
+                .filter(arr -> arr.length > 1 && isValidGithubUserName(arr[0]) && isValidGitHubRepoName(arr[1]))
                 .map(pathParts -> new GitHubLinkParsingResult(pathParts[0], pathParts[1]));
     }
 
-    private boolean isValidGitHubId(String s) {
+    private boolean isValidGitHubRepoName(String s) {
         return s.matches("[0-9a-zA-Z-_]+");
+    }
+
+    private boolean isValidGithubUserName(String s) {
+        return s.matches("[0-9a-zA-Z]+(-[0-9a-zA-Z]+)*");
     }
 }

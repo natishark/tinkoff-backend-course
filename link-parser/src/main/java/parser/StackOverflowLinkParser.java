@@ -27,6 +27,6 @@ public class StackOverflowLinkParser extends AbstractLinkParser {
     }
 
     private boolean isValidId(String s) {
-        return s.matches("[0-9]+");
+        return s.matches("[0-9]{1,10}");
     }
 }

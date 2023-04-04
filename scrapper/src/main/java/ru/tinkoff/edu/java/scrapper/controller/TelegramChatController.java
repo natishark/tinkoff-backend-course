@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.tinkoff.edu.java.scrapper.controller.exception.ResourceNotFoundException;
+import com.natishark.course.tinkoff.bot.exception.ResourceNotFoundException;
 
 @RestController
 public class TelegramChatController {
