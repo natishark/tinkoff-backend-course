@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  postgresql:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_DB=scrapper
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  liquibase-migrations:
+     image: liquibase/liquibase:4.18
+     depends_on:
+         - postgresql
+     command:
+         - --hub-mode=off
+         - --changelog-file=master.xml
+         - --driver=org.postgresql.Driver
+         - --url=jdbc:postgresql://postgresql:5432/scrapper
+         - --username=postgres
+         - --password=postgres
+         - update
+     volumes:
+         - ./migrations:/liquibase/changelog
+     networks:
+         - backend
+
+volumes:
+  postgres:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
