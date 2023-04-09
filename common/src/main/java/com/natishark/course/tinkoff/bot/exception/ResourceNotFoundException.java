@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.scrapper.controller.exception;
+package com.natishark.course.tinkoff.bot.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

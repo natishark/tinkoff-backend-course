@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.scrapper.dto;
+package com.natishark.course.tinkoff.bot.dto;
 
 import java.net.URI;
 
