@@ -1,14 +1,12 @@
-package ru.tinkoff.edu.java.bot.service.scrapperclient;
+package ru.tinkoff.edu.java.bot.client.scrapper;
 
 import com.natishark.course.tinkoff.bot.dto.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.util.function.Function;
 
 @Service
 public class ScrapperClient {

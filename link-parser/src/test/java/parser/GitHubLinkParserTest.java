@@ -70,7 +70,9 @@ public class GitHubLinkParserTest {
             "github.com/Torantulino/Auto-GPT"
     })
     public void parser_InvalidGithubLinkPrefix_Null(String link) {
-        parser_InvalidGithubLink_Null(link);
+        LinkParsingResult result = parser.parse(link);
+
+        assertNull(result);
     }
 
     @ParameterizedTest
@@ -80,7 +82,9 @@ public class GitHubLinkParserTest {
             "https://github.com/ppalaga?tab=stars"
     })
     public void parser_InvalidGithubLinkWithTooLittlePath_Null(String link) {
-        parser_InvalidGithubLink_Null(link);
+        LinkParsingResult result = parser.parse(link);
+
+        assertNull(result);
     }
 
     @ParameterizedTest
@@ -100,10 +104,6 @@ public class GitHubLinkParserTest {
             "https://github.com///"
     })
     public void parser_InvalidUserOrRepositoryName_Null(String link) {
-        parser_InvalidGithubLink_Null(link);
-    }
-
-    private void parser_InvalidGithubLink_Null(String link) {
         LinkParsingResult result = parser.parse(link);
 
         assertNull(result);

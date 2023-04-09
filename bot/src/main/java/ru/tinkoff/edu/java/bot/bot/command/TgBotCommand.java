@@ -1,8 +1,8 @@
-package ru.tinkoff.edu.java.bot.service.botapi.command;
+package ru.tinkoff.edu.java.bot.bot.command;
 
 import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.Update;
-import ru.tinkoff.edu.java.bot.service.botapi.util.ApiUtils;
+import ru.tinkoff.edu.java.bot.bot.util.ApiUtils;
 
 public interface TgBotCommand extends ExecutableCommand {
 

@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.bot.botapi;
+package ru.tinkoff.edu.java.bot.botapi.util;
 
 import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Message;

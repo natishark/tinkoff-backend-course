@@ -1,24 +1,25 @@
-package ru.tinkoff.edu.java.bot.service.botapi.command;
+package ru.tinkoff.edu.java.bot.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.ForceReply;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
-import ru.tinkoff.edu.java.bot.service.botapi.util.ApiUtils;
+import ru.tinkoff.edu.java.bot.bot.util.ApiUtils;
+import ru.tinkoff.edu.java.bot.enums.Command;
 
 @Component
-public class UntrackCommand implements TgBotCommand {
+public class TrackCommand implements TgBotCommand {
 
-    public static String MESSAGE = "Which link do you want to stop tracking?";
+    public static String MESSAGE = "Which link do you want to track?";
 
     @Override
     public String command() {
-        return Command.UNTRACK.name;
+        return Command.TRACK.name;
     }
 
     @Override
     public String description() {
-        return Command.UNTRACK.description;
+        return Command.TRACK.description;
     }
 
     @Override

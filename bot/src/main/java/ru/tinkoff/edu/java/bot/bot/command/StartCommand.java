@@ -1,11 +1,12 @@
-package ru.tinkoff.edu.java.bot.service.botapi.command;
+package ru.tinkoff.edu.java.bot.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.tinkoff.edu.java.bot.service.botapi.util.ApiUtils;
-import ru.tinkoff.edu.java.bot.service.scrapperclient.ScrapperClient;
+import ru.tinkoff.edu.java.bot.bot.util.ApiUtils;
+import ru.tinkoff.edu.java.bot.enums.Command;
+import ru.tinkoff.edu.java.bot.service.ScrapperService;
 
 @Component
 public class StartCommand implements TgBotCommand {
@@ -17,11 +18,11 @@ public class StartCommand implements TgBotCommand {
             
             For more information, use /help command.""";
 
-    private final ScrapperClient scrapperClient;
+    private final ScrapperService scrapperService;
 
     @Autowired
-    public StartCommand(ScrapperClient scrapperClient) {
-        this.scrapperClient = scrapperClient;
+    public StartCommand(ScrapperService scrapperService) {
+        this.scrapperService = scrapperService;
     }
 
     @Override
@@ -36,7 +37,7 @@ public class StartCommand implements TgBotCommand {
 
     @Override
     public SendMessage handle(Update update) {
-        scrapperClient.registerChat(ApiUtils.getChatId(update)).block();
+        scrapperService.registerChat(ApiUtils.getChatId(update));
 
         return ApiUtils.createSendMessage(update, GREETING);
     }

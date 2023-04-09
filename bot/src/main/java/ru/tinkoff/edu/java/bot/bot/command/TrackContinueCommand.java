@@ -1,30 +1,29 @@
-package ru.tinkoff.edu.java.bot.service.botapi.command;
+package ru.tinkoff.edu.java.bot.bot.command;
 
 import com.natishark.course.tinkoff.bot.dto.LinkResponse;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
-import ru.tinkoff.edu.java.bot.service.botapi.util.ApiUtils;
-import ru.tinkoff.edu.java.bot.service.scrapperclient.ScrapperClient;
+import ru.tinkoff.edu.java.bot.bot.util.ApiUtils;
+import ru.tinkoff.edu.java.bot.service.ScrapperService;
 
-import java.net.URI;
 import java.util.Optional;
 
 @Component
 public class TrackContinueCommand implements ExecutableCommand {
 
-    private final ScrapperClient scrapperClient;
+    private final ScrapperService scrapperService;
 
-    public TrackContinueCommand(ScrapperClient scrapperClient) {
-        this.scrapperClient = scrapperClient;
+    public TrackContinueCommand(ScrapperService scrapperService) {
+        this.scrapperService = scrapperService;
     }
 
     @Override
     public SendMessage handle(Update update) {
-        Optional<LinkResponse> linkResponse = scrapperClient.addLinkTracking(
+        Optional<LinkResponse> linkResponse = scrapperService.addLinkTracking(
                 ApiUtils.getChatId(update),
-                URI.create(update.message().text())
-        ).blockOptional();
+                update.message().text()
+        );
 
         return ApiUtils.createSendMessage(update, linkResponse
                 .map(response -> "I am tracking the changes by the link " + response.url() + "\uD83D\uDE11")

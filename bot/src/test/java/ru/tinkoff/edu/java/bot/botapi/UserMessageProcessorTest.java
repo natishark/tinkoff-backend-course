@@ -4,7 +4,8 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.tinkoff.edu.java.bot.service.botapi.UserMessageProcessor;
+import ru.tinkoff.edu.java.bot.bot.UserMessageProcessor;
+import ru.tinkoff.edu.java.bot.botapi.util.TestUtils;
 
 import java.util.random.RandomGenerator;
 

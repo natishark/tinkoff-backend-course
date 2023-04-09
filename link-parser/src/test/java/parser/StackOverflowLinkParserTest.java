@@ -35,12 +35,18 @@ public class StackOverflowLinkParserTest {
             "https://stackoverflow.comquestions/75917310/php-encryption-usb-key"
     })
     public void parse_InvalidStackOverflowLinkPrefix_Null(String link) {
-        parse_InvalidStackOverflowLink_Null(link);
+        LinkParsingResult result = parser.parse(link);
+
+        assertNull(result);
     }
 
     @Test
     public void parse_StackOverflowLinkOnlyWithPrefix_Null() {
-        parse_InvalidStackOverflowLink_Null("https://stackoverflow.com/");
+        String link = "https://stackoverflow.com/";
+
+        LinkParsingResult result = parser.parse(link);
+
+        assertNull(result);
     }
 
     @ParameterizedTest
@@ -54,10 +60,6 @@ public class StackOverflowLinkParserTest {
             "https://stackoverflow.com/questions/99999999999999/php-encryption-usb-key"
     })
     public void parse_StackOverflowLinkWithInvalidQuestionId_Null(String link) {
-        parse_InvalidStackOverflowLink_Null(link);
-    }
-
-    private void parse_InvalidStackOverflowLink_Null(String link) {
         LinkParsingResult result = parser.parse(link);
 
         assertNull(result);

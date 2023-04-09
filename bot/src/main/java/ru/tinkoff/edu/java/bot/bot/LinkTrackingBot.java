@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.bot.service.botapi;
+package ru.tinkoff.edu.java.bot.bot;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
@@ -10,7 +10,7 @@ import com.pengrad.telegrambot.request.SetMyCommands;
 import com.pengrad.telegrambot.response.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.tinkoff.edu.java.bot.service.botapi.command.TgBotCommand;
+import ru.tinkoff.edu.java.bot.bot.command.TgBotCommand;
 
 import java.util.List;
 

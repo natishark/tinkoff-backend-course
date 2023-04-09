@@ -1,10 +1,11 @@
-package ru.tinkoff.edu.java.bot.service.botapi.command;
+package ru.tinkoff.edu.java.bot.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
-import ru.tinkoff.edu.java.bot.service.botapi.util.ApiUtils;
-import ru.tinkoff.edu.java.bot.service.botapi.util.HtmlMessageBuilder;
+import ru.tinkoff.edu.java.bot.bot.util.ApiUtils;
+import ru.tinkoff.edu.java.bot.bot.util.HtmlMessageBuilder;
+import ru.tinkoff.edu.java.bot.enums.Command;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -12,7 +13,9 @@ import java.util.stream.Collectors;
 @Component
 public class HelpCommand implements TgBotCommand {
 
-    private String message() {
+    private static final String MESSAGE = message();
+
+    private static String message() {
         return new HtmlMessageBuilder()
                 .addBoldLine("Commands you can use:")
                 .addList(Arrays.stream(Command.values())
@@ -33,6 +36,6 @@ public class HelpCommand implements TgBotCommand {
 
     @Override
     public SendMessage handle(Update update) {
-        return ApiUtils.createSendMessage(update, message());
+        return ApiUtils.createSendMessage(update, MESSAGE);
     }
 }

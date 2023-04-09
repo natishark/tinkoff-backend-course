@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import reactor.core.publisher.Mono;
 import ru.tinkoff.edu.java.bot.botapi.BotApiTest;
-import ru.tinkoff.edu.java.bot.botapi.TestUtils;
-import ru.tinkoff.edu.java.bot.service.botapi.command.ListCommand;
-import ru.tinkoff.edu.java.bot.service.scrapperclient.ScrapperClient;
+import ru.tinkoff.edu.java.bot.botapi.util.TestUtils;
+import ru.tinkoff.edu.java.bot.bot.command.ListCommand;
+import ru.tinkoff.edu.java.bot.client.scrapper.ScrapperClient;
 
 import java.net.URI;
 import java.util.List;

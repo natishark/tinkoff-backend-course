@@ -1,12 +1,12 @@
-package ru.tinkoff.edu.java.bot.service.botapi;
+package ru.tinkoff.edu.java.bot.bot;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.tinkoff.edu.java.bot.service.botapi.command.ExecutableCommand;
-import ru.tinkoff.edu.java.bot.service.botapi.command.TgBotCommand;
-import ru.tinkoff.edu.java.bot.service.botapi.util.ApiUtils;
+import ru.tinkoff.edu.java.bot.bot.command.ExecutableCommand;
+import ru.tinkoff.edu.java.bot.bot.command.TgBotCommand;
+import ru.tinkoff.edu.java.bot.bot.util.ApiUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;

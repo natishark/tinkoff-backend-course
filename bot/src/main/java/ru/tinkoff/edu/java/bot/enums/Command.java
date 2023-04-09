@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.bot.service.botapi.command;
+package ru.tinkoff.edu.java.bot.enums;
 
 public enum Command {
     START("start", "Start communicating with me"),
