@@ -20,6 +20,7 @@ public class SimpleTest extends IntegrationEnvironment {
 
         connection.createStatement().execute("INSERT INTO chats VALUES (12345)");
         ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM chats");
+        connection.close();
 
         resultSet.next();
         long result = resultSet.getLong(1);
