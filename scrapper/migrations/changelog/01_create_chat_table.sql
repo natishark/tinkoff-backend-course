@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
---changeset natishark:1
-CREATE TABLE chats
+--changeset natishark:init_db
+CREATE TABLE IF NOT EXISTS chats
 (
     id bigint PRIMARY KEY
 );
