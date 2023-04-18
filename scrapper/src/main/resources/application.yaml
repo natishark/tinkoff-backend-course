@@ -2,12 +2,19 @@ app:
   test: arbitrary_value
   scheduler:
     interval: PT10S
-  githubCredentials:
-    githubToken: ${GITHUB_TOKEN}
+    checkIndent: PT100S
 
 springdoc:
   swagger-ui:
     path: /swagger-ui
+
+spring:
+  liquibase:
+    enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scrapper
+    username: postgres
+    password: postgres
 
 server:
   port: 8088

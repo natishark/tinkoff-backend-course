@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS links
 (
     id         bigint PRIMARY KEY DEFAULT nextVal('link_seq'),
     url        text        NOT NULL UNIQUE,
-    updated_at timestamp   NOT NULL
+    updated_at timestamptz NOT NULL
 );

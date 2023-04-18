@@ -6,7 +6,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import ru.tinkoff.edu.java.scrapper.client.github.dto.RepositoryRequest;
 import ru.tinkoff.edu.java.scrapper.client.github.dto.RepositoryResponse;
-import ru.tinkoff.edu.java.scrapper.configuration.ApplicationConfigHolder;
 
 public class GitHubClient {
 
@@ -23,19 +22,10 @@ public class GitHubClient {
     }
 
     public GitHubClient(String url) {
-        final String secretToken = ApplicationConfigHolder
-                .getConfig()
-                .githubCredentials()
-                .githubToken();
-
         githubClient = WebClient
                 .builder()
                 .baseUrl(url)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(
-                        HttpHeaders.AUTHORIZATION,
-                        ACCESS_TOKEN_PREFIX + secretToken
-                )
                 .defaultHeader(API_VERSION_HEADER_NAME, API_VERSION_HEADER_VALUE)
                 .build();
     }
@@ -48,7 +38,9 @@ public class GitHubClient {
                         .pathSegment(request.userName())
                         .path(request.repositoryName())
                         .build())
-                .retrieve()
-                .bodyToMono(RepositoryResponse.class);
+                .exchangeToMono(response -> response.statusCode().is2xxSuccessful()
+                        ? response.bodyToMono(RepositoryResponse.class)
+                        : Mono.empty()
+                );
     }
 }
