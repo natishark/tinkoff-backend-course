@@ -2,7 +2,7 @@ app:
   test: arbitrary_value
   scheduler:
     interval: PT10S
-    checkIndent: PT100S
+    checkIndent: PT1000S
 
 springdoc:
   swagger-ui:
