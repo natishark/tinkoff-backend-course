@@ -20,11 +20,13 @@ public class JdbcLinkDao {
     public static final RowMapper<Link> LINK_ROW_MAPPER = (resultSet, rowNum) -> new Link(
             resultSet.getLong("id"),
             resultSet.getString("url"),
-            resultSet.getTimestamp("updated_at")
+            resultSet.getTimestamp("updated_at"),
+            resultSet.getTimestamp("pushed_at"),
+            resultSet.getInt("answer_count")
     );
 
     private static final String INSERT_QUERY = """
-            INSERT INTO links (url, updated_at) VALUES (?, ?)
+            INSERT INTO links (url, updated_at, pushed_at, answer_count) VALUES (?, ?, ?, ?)
             ON CONFLICT (url) DO UPDATE SET id = links.id RETURNING id""";
 
     private static final String DELETE_QUERY = "DELETE FROM links WHERE id = ?";
@@ -33,11 +35,13 @@ public class JdbcLinkDao {
 
     private static final String SELECT_BY_URL_QUERY = "SELECT * FROM links WHERE url = ?";
 
-    private static final String UPDATE_QUERY =
-            "UPDATE links SET updated_at = ?, last_checked_at = ? WHERE id = ?";
+    private static final String UPDATE_QUERY = """
+            UPDATE links SET updated_at = ?, last_checked_at = ?,
+            pushed_at = ?, answer_count = ?
+            WHERE id = ?""";
 
     private static final String SELECT_BY_LAST_CHECKED_AT_QUERY = """
-            SELECT id, url, updated_at
+            SELECT id, url, updated_at, pushed_at, answer_count
             FROM links l join chat_link cl on l.id = cl.link_id
             WHERE last_checked_at < ? GROUP BY id""";
 
@@ -52,7 +56,9 @@ public class JdbcLinkDao {
                 INSERT_QUERY,
                 Long.class,
                 link.getUrl(),
-                link.getUpdatedAt()
+                link.getUpdatedAt(),
+                link.getPushedAt(),
+                link.getAnswerCount()
         ));
 
         return link;
@@ -89,7 +95,11 @@ public class JdbcLinkDao {
                 var link = links.get(i);
                 ps.setTimestamp(1, link.getUpdatedAt());
                 ps.setTimestamp(2, lastCheckTimeStamp);
-                ps.setLong(3, link.getId());
+                ps.setTimestamp(3, link.getPushedAt());
+                if (link.getAnswerCount() != null) {
+                    ps.setInt(4, link.getAnswerCount());
+                }
+                ps.setLong(5, link.getId());
             }
 
             @Override

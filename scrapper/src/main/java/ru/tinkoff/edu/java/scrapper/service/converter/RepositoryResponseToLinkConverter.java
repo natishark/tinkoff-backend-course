@@ -11,9 +11,9 @@ public class RepositoryResponseToLinkConverter implements Converter<RepositoryRe
 
     @Override
     public Link convert(@NotNull RepositoryResponse response) {
-        return new Link(
-                response.htmlUrl().toString(),
-                Timestamp.valueOf(response.updatedAt().toLocalDateTime())
-        );
+        return new Link()
+                .setUrl(response.htmlUrl().toString())
+                .setUpdatedAt(Timestamp.valueOf(response.updatedAt().toLocalDateTime()))
+                .setPushedAt(Timestamp.valueOf(response.pushedAt().toLocalDateTime()));
     }
 }

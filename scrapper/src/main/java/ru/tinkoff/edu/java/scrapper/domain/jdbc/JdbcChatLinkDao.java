@@ -21,7 +21,7 @@ public class JdbcChatLinkDao {
             DELETE FROM chat_link WHERE chat_id = ? AND link_id = ?""";
 
     private static final String SELECT_LINKS_BY_CHAT_ID_QUERY = """
-            SELECT l.id AS id, url, updated_at
+            SELECT l.id AS id, url, updated_at, pushed_at, answer_count
             FROM chat_link cl JOIN links l on l.id = cl.link_id
             WHERE chat_id = ?""";
 

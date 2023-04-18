@@ -10,9 +10,10 @@ public class QuestionResponseToLinkConverter implements Converter<QuestionRespon
 
     @Override
     public Link convert(QuestionResponse response) {
-        return new Link(
-                response.items().get(0).link().toString(),
-                Timestamp.valueOf(response.items().get(0).lastActivityDate().toLocalDateTime())
-        );
+        var item = response.items().get(0);
+        return new Link()
+                .setUrl(item.link().toString())
+                .setUpdatedAt(Timestamp.valueOf(item.lastActivityDate().toLocalDateTime()))
+                .setAnswerCount(item.answerCount());
     }
 }

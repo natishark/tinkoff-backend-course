@@ -6,6 +6,7 @@ import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.DeleteMyCommands;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
+import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import com.pengrad.telegrambot.response.BaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,9 @@ public class LinkTrackingBot implements AutoCloseable, UpdatesListener {
 
     public <T extends BaseRequest<T, R>, R extends BaseResponse> void execute(BaseRequest<T, R> request) {
         telegramBot.execute(request);
+    }
+
+    public void sendMessages(List<Long> chatIds, String message) {
+        chatIds.forEach(id -> execute(new SendMessage(id, message)));
     }
 }

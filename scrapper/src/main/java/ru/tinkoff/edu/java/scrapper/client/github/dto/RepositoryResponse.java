@@ -9,6 +9,8 @@ public record RepositoryResponse(
         @JsonProperty("html_url")
         URI htmlUrl,
         @JsonProperty("updated_at")
-        OffsetDateTime updatedAt
+        OffsetDateTime updatedAt,
+        @JsonProperty("pushed_at")
+        OffsetDateTime pushedAt
 ) {
 }
