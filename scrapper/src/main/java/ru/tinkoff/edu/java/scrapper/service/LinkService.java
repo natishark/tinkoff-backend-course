@@ -1,6 +1,6 @@
 package ru.tinkoff.edu.java.scrapper.service;
 
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 import java.net.URI;
 import java.time.LocalDateTime;

@@ -1,8 +1,8 @@
 package ru.tinkoff.edu.java.scrapper.service.converter;
 
 import org.springframework.core.convert.converter.Converter;
-import ru.tinkoff.edu.java.scrapper.client.stackoverflow.dto.QuestionResponse;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.client.stackoverflow.QuestionResponse;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 import java.sql.Timestamp;
 

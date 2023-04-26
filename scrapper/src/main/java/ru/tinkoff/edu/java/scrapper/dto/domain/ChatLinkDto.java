@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.scrapper.domain.dto;
+package ru.tinkoff.edu.java.scrapper.dto.domain;
 
 public record ChatLinkDto(
         long chatId,

@@ -7,7 +7,7 @@ import com.natishark.course.tinkoff.bot.dto.RemoveLinkRequest;
 import jakarta.validation.Valid;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 import ru.tinkoff.edu.java.scrapper.service.LinkService;
 
 import java.util.List;

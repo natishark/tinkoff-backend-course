@@ -1,6 +1,6 @@
 package ru.tinkoff.edu.java.scrapper.service;
 
-import ru.tinkoff.edu.java.scrapper.domain.dto.Chat;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
 
 import java.util.List;
 import java.util.Optional;

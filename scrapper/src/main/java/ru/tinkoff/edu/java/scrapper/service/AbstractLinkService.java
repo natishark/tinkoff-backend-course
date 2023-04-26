@@ -6,12 +6,12 @@ import parser.result.GitHubLinkParsingResult;
 import parser.result.LinkParsingResult;
 import parser.result.StackOverflowLinkParsingResult;
 import ru.tinkoff.edu.java.scrapper.client.github.GitHubClient;
-import ru.tinkoff.edu.java.scrapper.client.github.dto.RepositoryRequest;
-import ru.tinkoff.edu.java.scrapper.client.github.dto.RepositoryResponse;
+import ru.tinkoff.edu.java.scrapper.dto.client.github.RepositoryRequest;
+import ru.tinkoff.edu.java.scrapper.dto.client.github.RepositoryResponse;
 import ru.tinkoff.edu.java.scrapper.client.stackoverflow.StackOverflowClient;
-import ru.tinkoff.edu.java.scrapper.client.stackoverflow.dto.QuestionRequest;
-import ru.tinkoff.edu.java.scrapper.client.stackoverflow.dto.QuestionResponse;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.client.stackoverflow.QuestionRequest;
+import ru.tinkoff.edu.java.scrapper.dto.client.stackoverflow.QuestionResponse;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 import java.net.URI;
 import java.util.Optional;

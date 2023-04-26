@@ -2,9 +2,9 @@ package ru.tinkoff.edu.java.scrapper.domain.jdbc;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Chat;
-import ru.tinkoff.edu.java.scrapper.domain.dto.ChatLinkDto;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
+import ru.tinkoff.edu.java.scrapper.dto.domain.ChatLinkDto;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -45,7 +45,6 @@ public class JdbcChatLinkDao {
         return link;
     }
 
-    // TODO: delete link when no subscriptions on this link
     public void unsubscribe(ChatLinkDto id) {
         jdbcTemplate.update(DELETE_RECORD_QUERY, id.chatId(), id.linkId());
     }

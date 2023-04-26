@@ -1,7 +1,7 @@
 package ru.tinkoff.edu.java.scrapper.service.jdbc;
 
 import org.springframework.stereotype.Service;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Chat;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
 import ru.tinkoff.edu.java.scrapper.domain.jdbc.JdbcChatDao;
 import ru.tinkoff.edu.java.scrapper.domain.jdbc.JdbcChatLinkDao;
 import ru.tinkoff.edu.java.scrapper.service.ChatService;

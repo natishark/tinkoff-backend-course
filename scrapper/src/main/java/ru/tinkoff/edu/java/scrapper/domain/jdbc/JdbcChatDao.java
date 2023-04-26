@@ -3,7 +3,7 @@ package ru.tinkoff.edu.java.scrapper.domain.jdbc;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Chat;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
 
 import javax.sql.DataSource;
 import java.util.List;

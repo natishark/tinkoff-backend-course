@@ -1,7 +1,7 @@
 package ru.tinkoff.edu.java.scrapper.util;
 
 import lombok.Getter;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 public class LinkUpdateEvent {
 

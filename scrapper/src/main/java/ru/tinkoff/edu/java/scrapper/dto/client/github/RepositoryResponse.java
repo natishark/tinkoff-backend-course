@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.scrapper.client.github.dto;
+package ru.tinkoff.edu.java.scrapper.dto.client.github;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

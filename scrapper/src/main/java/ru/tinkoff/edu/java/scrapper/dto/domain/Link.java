@@ -1,12 +1,12 @@
-package ru.tinkoff.edu.java.scrapper.domain.dto;
+package ru.tinkoff.edu.java.scrapper.dto.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Link {

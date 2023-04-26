@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import ru.tinkoff.edu.java.scrapper.IntegrationEnvironment;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Chat;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
 
 import java.util.ArrayList;
 import java.util.List;

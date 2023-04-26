@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
@@ -96,9 +96,7 @@ public class JdbcLinkDao {
                 ps.setTimestamp(1, link.getUpdatedAt());
                 ps.setTimestamp(2, lastCheckTimeStamp);
                 ps.setTimestamp(3, link.getPushedAt());
-                if (link.getAnswerCount() != null) {
-                    ps.setInt(4, link.getAnswerCount());
-                }
+                ps.setObject(4, link.getAnswerCount());
                 ps.setLong(5, link.getId());
             }
 

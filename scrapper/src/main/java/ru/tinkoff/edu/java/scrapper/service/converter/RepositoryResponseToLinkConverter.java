@@ -2,8 +2,8 @@ package ru.tinkoff.edu.java.scrapper.service.converter;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.convert.converter.Converter;
-import ru.tinkoff.edu.java.scrapper.client.github.dto.RepositoryResponse;
-import ru.tinkoff.edu.java.scrapper.domain.dto.Link;
+import ru.tinkoff.edu.java.scrapper.dto.client.github.RepositoryResponse;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 import java.sql.Timestamp;
 

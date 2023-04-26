@@ -13,6 +13,6 @@ public record ApplicationConfig(
         @NotNull Scheduler scheduler
 ) {
 
-    record Scheduler(Duration interval, Duration checkIndent) {
+    public record Scheduler(Duration interval, Duration checkIndent) {
     }
 }
