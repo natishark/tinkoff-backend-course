@@ -2,8 +2,8 @@ package ru.tinkoff.edu.java.scrapper.client.stackoverflow;
 
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ru.tinkoff.edu.java.scrapper.client.stackoverflow.dto.QuestionRequest;
-import ru.tinkoff.edu.java.scrapper.client.stackoverflow.dto.QuestionResponse;
+import ru.tinkoff.edu.java.scrapper.dto.client.stackoverflow.QuestionRequest;
+import ru.tinkoff.edu.java.scrapper.dto.client.stackoverflow.QuestionResponse;
 
 public class StackOverflowClient {
 
@@ -32,7 +32,9 @@ public class StackOverflowClient {
                         .path(request.id())
                         .queryParam(SITE_QUERY_PARAM_NAME, SITE_QUERY_PARAM_VALUE)
                         .build())
-                .retrieve()
-                .bodyToMono(QuestionResponse.class);
+                .exchangeToMono(response -> response.statusCode().is2xxSuccessful()
+                        ? response.bodyToMono(QuestionResponse.class)
+                        : Mono.empty()
+                );
     }
 }

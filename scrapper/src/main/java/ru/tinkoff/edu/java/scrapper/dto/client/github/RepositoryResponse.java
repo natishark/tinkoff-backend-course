@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.scrapper.client.github.dto;
+package ru.tinkoff.edu.java.scrapper.dto.client.github;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +9,8 @@ public record RepositoryResponse(
         @JsonProperty("html_url")
         URI htmlUrl,
         @JsonProperty("updated_at")
-        OffsetDateTime updatedAt
+        OffsetDateTime updatedAt,
+        @JsonProperty("pushed_at")
+        OffsetDateTime pushedAt
 ) {
 }
