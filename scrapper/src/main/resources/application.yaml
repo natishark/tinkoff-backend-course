@@ -3,6 +3,7 @@ app:
   scheduler:
     interval: PT10S
     checkIndent: PT1000S
+  database-access-type: jpa
 
 springdoc:
   swagger-ui:
@@ -15,6 +16,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/scrapper
     username: postgres
     password: postgres
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
 
 server:
   port: 8088

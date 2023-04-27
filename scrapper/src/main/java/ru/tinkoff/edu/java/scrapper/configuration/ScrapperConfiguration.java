@@ -7,8 +7,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import parser.LinkParser;
 import ru.tinkoff.edu.java.scrapper.controller.converter.LinkToLinkResponseConverter;
-import ru.tinkoff.edu.java.scrapper.service.converter.QuestionResponseToLinkConverter;
-import ru.tinkoff.edu.java.scrapper.service.converter.RepositoryResponseToLinkConverter;
+import ru.tinkoff.edu.java.scrapper.service.converter.*;
 
 @Configuration
 public class ScrapperConfiguration implements WebMvcConfigurer {
@@ -24,5 +23,8 @@ public class ScrapperConfiguration implements WebMvcConfigurer {
         registry.addConverter(new LinkToLinkResponseConverter());
         registry.addConverter(new QuestionResponseToLinkConverter());
         registry.addConverter(new RepositoryResponseToLinkConverter());
+        registry.addConverter(new ChatEntityToChatConverter());
+        registry.addConverter(new LinkEntityToLinkConverter());
+        registry.addConverter(new LinkToLinkEntityConverter());
     }
 }

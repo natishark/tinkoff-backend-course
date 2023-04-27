@@ -5,6 +5,7 @@ import com.natishark.course.tinkoff.bot.dto.LinkResponse;
 import com.natishark.course.tinkoff.bot.dto.ListLinksResponse;
 import com.natishark.course.tinkoff.bot.dto.RemoveLinkRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
 import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
@@ -15,15 +16,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/links")
+@RequiredArgsConstructor
 public class LinkController {
 
     private final LinkService linkService;
     private final ConversionService conversionService;
-
-    public LinkController(LinkService linkService, ConversionService conversionService) {
-        this.linkService = linkService;
-        this.conversionService = conversionService;
-    }
 
     @GetMapping
     public ListLinksResponse getTrackedLinks(@RequestHeader(name = "Tg-Chat-Id") long tgChatId) {

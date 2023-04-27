@@ -1,13 +1,10 @@
-package ru.tinkoff.edu.java.scrapper.service.jdbc;
+package ru.tinkoff.edu.java.scrapper.service;
 
 import com.natishark.course.tinkoff.bot.dto.LinkUpdateRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.tinkoff.edu.java.scrapper.client.bot.BotClient;
 import ru.tinkoff.edu.java.scrapper.configuration.ApplicationConfig;
-import ru.tinkoff.edu.java.scrapper.service.ChatService;
-import ru.tinkoff.edu.java.scrapper.service.LinkService;
-import ru.tinkoff.edu.java.scrapper.service.LinkUpdater;
 import ru.tinkoff.edu.java.scrapper.util.LinkUpdateEvent;
 
 import java.net.URI;
@@ -18,22 +15,22 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
-public class JdbcLinkUpdater implements LinkUpdater {
+public class LinkUpdaterImpl implements ru.tinkoff.edu.java.scrapper.service.LinkUpdater {
 
     private final BotClient botClient;
     private final LinkService linkService;
-    private final ChatService chatService;
+    private final ClientService clientService;
     private final long checkIndent;
 
-    public JdbcLinkUpdater(
+    public LinkUpdaterImpl(
             BotClient botClient,
             LinkService linkService,
-            ChatService chatService,
+            ClientService clientService,
             ApplicationConfig config
     ) {
         this.botClient = botClient;
         this.linkService = linkService;
-        this.chatService = chatService;
+        this.clientService = clientService;
         this.checkIndent = config.scheduler().checkIndent().toMillis();
     }
 
@@ -45,9 +42,8 @@ public class JdbcLinkUpdater implements LinkUpdater {
                 .map(link -> {
                     LinkUpdateEvent event = new LinkUpdateEvent(
                             link,
-                            linkService.callApiByUrlAndConvertToLink(
-                                    URI.create(link.getUrl())).orElse(link).setId(link.getId()
-                            )
+                            clientService.getLinkInformation(URI.create(link.getUrl()))
+                                    .orElse(link).setId(link.getId())
                     );
                     return event.wasUpdated() ? event : null;
                 })
@@ -70,7 +66,7 @@ public class JdbcLinkUpdater implements LinkUpdater {
                 event.getLink().getId(),
                 URI.create(event.getLink().getUrl()),
                 event.getDescription(),
-                chatService.getChatIdsByLinkId(event.getLink().getId())
+                linkService.getChatIdsByLinkId(event.getLink().getId())
         )).subscribe());
     }
 }
