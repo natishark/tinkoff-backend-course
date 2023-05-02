@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class Link {
 
-    private Long id = null;
+    private Long id;
     private String url;
     private Timestamp updatedAt;
     private Timestamp pushedAt;

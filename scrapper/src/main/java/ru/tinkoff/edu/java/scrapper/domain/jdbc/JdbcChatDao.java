@@ -2,14 +2,12 @@ package ru.tinkoff.edu.java.scrapper.domain.jdbc;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
 
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public class JdbcChatDao {
 
     public static final RowMapper<Chat> CHAT_ROW_MAPPER = (resultSet, rowNum) ->

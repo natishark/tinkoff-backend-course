@@ -1,7 +1,6 @@
 package ru.tinkoff.edu.java.scrapper.domain.jdbc;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
 import ru.tinkoff.edu.java.scrapper.dto.domain.ChatLinkDto;
 import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
@@ -9,7 +8,6 @@ import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 import javax.sql.DataSource;
 import java.util.List;
 
-@Repository
 public class JdbcChatLinkDao {
 
     private static final String INSERT_RECORD_QUERY = """

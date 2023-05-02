@@ -12,6 +12,8 @@ import ru.tinkoff.edu.java.scrapper.service.LinkService;
 import ru.tinkoff.edu.java.scrapper.service.jdbc.JdbcChatService;
 import ru.tinkoff.edu.java.scrapper.service.jdbc.JdbcLinkService;
 
+import javax.sql.DataSource;
+
 @Configuration
 @ConditionalOnProperty(prefix = "app", name = "database-access-type", havingValue = "jdbc")
 public class JdbcAccessConfiguration {
@@ -23,11 +25,26 @@ public class JdbcAccessConfiguration {
             JdbcLinkDao linkDao,
             ClientService clientService
     ) {
-        return new JdbcLinkService(chatLinkDao, chatService,linkDao, clientService);
+        return new JdbcLinkService(chatLinkDao, chatService, linkDao, clientService);
     }
 
     @Bean
     public ChatService chatService(JdbcChatDao chatDao) {
         return new JdbcChatService(chatDao);
+    }
+
+    @Bean
+    public JdbcChatDao jdbcChatDao(DataSource dataSource) {
+        return new JdbcChatDao(dataSource);
+    }
+
+    @Bean
+    public JdbcLinkDao jdbcLinkDao(DataSource dataSource) {
+        return new JdbcLinkDao(dataSource);
+    }
+
+    @Bean
+    public JdbcChatLinkDao jdbcChatLinkDao(DataSource dataSource, JdbcLinkDao linkDao) {
+        return new JdbcChatLinkDao(dataSource, linkDao);
     }
 }
