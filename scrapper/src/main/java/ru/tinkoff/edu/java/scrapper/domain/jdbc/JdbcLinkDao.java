@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 
 import javax.sql.DataSource;
@@ -14,7 +13,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public class JdbcLinkDao {
 
     public static final RowMapper<Link> LINK_ROW_MAPPER = (resultSet, rowNum) -> new Link(

@@ -48,8 +48,8 @@ public class ListCommandTest extends BotApiTest {
         Update update = TestUtils.initUpdate(chatId);
         Mockito.when(scrapperClient.getTrackedLinks(chatId))
                 .thenReturn(Mono.just(new ListLinksResponse(List.of(
-                        new LinkResponse(0, URI.create("https://link1.link")),
-                        new LinkResponse(1, URI.create("https://some-link2.link"))
+                        new LinkResponse(0L, URI.create("https://link1.link")),
+                        new LinkResponse(1L, URI.create("https://some-link2.link"))
                 ), 2)));
 
         SendMessage result = listCommand.handle(update);

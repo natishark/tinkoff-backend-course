@@ -1,44 +1,30 @@
 package ru.tinkoff.edu.java.scrapper.service.jdbc;
 
 import com.natishark.course.tinkoff.bot.exception.ResourceNotFoundException;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.stereotype.Service;
-import parser.LinkParser;
-import ru.tinkoff.edu.java.scrapper.client.github.GitHubClient;
-import ru.tinkoff.edu.java.scrapper.client.stackoverflow.StackOverflowClient;
-import ru.tinkoff.edu.java.scrapper.dto.domain.ChatLinkDto;
-import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
+import lombok.RequiredArgsConstructor;
+import ru.tinkoff.edu.java.scrapper.controller.exception.ChatNotFoundException;
 import ru.tinkoff.edu.java.scrapper.domain.jdbc.JdbcChatLinkDao;
 import ru.tinkoff.edu.java.scrapper.domain.jdbc.JdbcLinkDao;
-import ru.tinkoff.edu.java.scrapper.service.AbstractLinkService;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Chat;
+import ru.tinkoff.edu.java.scrapper.dto.domain.ChatLinkDto;
+import ru.tinkoff.edu.java.scrapper.dto.domain.Link;
 import ru.tinkoff.edu.java.scrapper.service.ChatService;
+import ru.tinkoff.edu.java.scrapper.service.ClientService;
+import ru.tinkoff.edu.java.scrapper.service.LinkService;
 
 import java.net.URI;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Service
-public class JdbcLinkService extends AbstractLinkService {
+@RequiredArgsConstructor
+public class JdbcLinkService implements LinkService {
 
     private final JdbcChatLinkDao chatLinkDao;
     private final ChatService chatService;
     private final JdbcLinkDao linkDao;
-
-    public JdbcLinkService(
-            JdbcChatLinkDao chatLinkDao,
-            ChatService chatService,
-            JdbcLinkDao linkDao,
-            LinkParser linkParser,
-            GitHubClient gitHubClient,
-            StackOverflowClient stackOverflowClient,
-            ConversionService conversionService
-    ) {
-        super(linkParser, gitHubClient, stackOverflowClient, conversionService);
-        this.chatLinkDao = chatLinkDao;
-        this.chatService = chatService;
-        this.linkDao = linkDao;
-    }
+    private final ClientService clientService;
 
     @Override
     public Link add(long tgChatId, URI url) {
@@ -46,7 +32,7 @@ public class JdbcLinkService extends AbstractLinkService {
 
         return chatLinkDao.subscribe(
                 tgChatId,
-                callApiByUrlAndConvertToLink(url)
+                clientService.getLinkInformation(url)
                         .orElseThrow(() -> new ResourceNotFoundException("No source on this link found."))
         );
     }
@@ -55,7 +41,7 @@ public class JdbcLinkService extends AbstractLinkService {
     public Link remove(long tgChatId, URI url) {
         validateChat(tgChatId);
 
-        String validatedUrl = callApiByUrlAndConvertToLink(url)
+        String validatedUrl = clientService.getLinkInformation(url)
                 .orElseThrow(() -> new ResourceNotFoundException("No source on this link found."))
                 .getUrl();
 
@@ -76,6 +62,12 @@ public class JdbcLinkService extends AbstractLinkService {
     }
 
     @Override
+    public List<Long> getChatIdsByLinkId(long linkId) {
+        return chatLinkDao.findAllChatsByLinkId(linkId).stream()
+                .map(Chat::id).collect(Collectors.toList());
+    }
+
+    @Override
     public List<Link> findAllTrackingLinksLastCheckedBefore(LocalDateTime lastCheckTime) {
         return linkDao.findAllTrackingLinksLastCheckedBefore(Timestamp.valueOf(lastCheckTime));
     }
@@ -86,7 +78,7 @@ public class JdbcLinkService extends AbstractLinkService {
 
     private void validateChat(long chatId) {
         if (chatService.findById(chatId).isEmpty()) {
-            throw new ResourceNotFoundException("Chat with id '%d' does not exist".formatted(chatId));
+            throw new ChatNotFoundException(chatId);
         }
     }
 }
