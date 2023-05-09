@@ -3,8 +3,8 @@ package ru.tinkoff.edu.java.scrapper.service;
 import com.natishark.course.tinkoff.bot.dto.LinkUpdateRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import ru.tinkoff.edu.java.scrapper.client.bot.BotClient;
 import ru.tinkoff.edu.java.scrapper.configuration.ApplicationConfig;
+import ru.tinkoff.edu.java.scrapper.service.messaging.UpdatesNotificationService;
 import ru.tinkoff.edu.java.scrapper.util.LinkUpdateEvent;
 
 import java.net.URI;
@@ -17,18 +17,18 @@ import java.util.stream.Collectors;
 @Component
 public class LinkUpdaterImpl implements ru.tinkoff.edu.java.scrapper.service.LinkUpdater {
 
-    private final BotClient botClient;
+    private final UpdatesNotificationService notificationService;
     private final LinkService linkService;
     private final ClientService clientService;
     private final long checkIndent;
 
     public LinkUpdaterImpl(
-            BotClient botClient,
+            UpdatesNotificationService notificationService,
             LinkService linkService,
             ClientService clientService,
             ApplicationConfig config
     ) {
-        this.botClient = botClient;
+        this.notificationService = notificationService;
         this.linkService = linkService;
         this.clientService = clientService;
         this.checkIndent = config.scheduler().checkIndent().toMillis();
@@ -62,11 +62,11 @@ public class LinkUpdaterImpl implements ru.tinkoff.edu.java.scrapper.service.Lin
                 LocalDateTime.now()
         );
 
-        events.forEach(event -> botClient.sendUpdate(new LinkUpdateRequest(
+        events.forEach(event -> notificationService.send(new LinkUpdateRequest(
                 event.getLink().getId(),
                 URI.create(event.getLink().getUrl()),
                 event.getDescription(),
                 linkService.getChatIdsByLinkId(event.getLink().getId())
-        )).subscribe());
+        )));
     }
 }
