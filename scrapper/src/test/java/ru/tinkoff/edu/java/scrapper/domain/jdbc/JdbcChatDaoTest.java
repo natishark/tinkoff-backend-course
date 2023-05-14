@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(properties="app.database-access-type=jdbc")
 public class JdbcChatDaoTest extends IntegrationEnvironment {
 
     @Autowired

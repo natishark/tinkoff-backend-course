@@ -4,6 +4,11 @@ app:
     interval: PT10S
     checkIndent: PT1000S
   database-access-type: jpa
+  rabbit-mq-info:
+    update-queue-name: updatesQueue
+    exchange-name: directExchange
+    updates-routing-key: updates
+  use-queue: true
 
 springdoc:
   swagger-ui:

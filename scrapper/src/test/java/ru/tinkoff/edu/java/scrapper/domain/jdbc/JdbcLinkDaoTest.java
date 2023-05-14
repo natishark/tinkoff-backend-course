@@ -14,7 +14,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(properties="app.database-access-type=jdbc")
 public class JdbcLinkDaoTest extends IntegrationEnvironment {
 
     @Autowired
