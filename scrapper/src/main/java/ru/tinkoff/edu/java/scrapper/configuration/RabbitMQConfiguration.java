@@ -13,14 +13,15 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(prefix = "app", name = "use-queue", havingValue = "true")
 public class RabbitMQConfiguration {
 
+    private static final String DLQ_SUFFIX = ".dlq";
+
     private final ApplicationConfig config;
-    private final String DLQ_ROUTING_KEY = config.rabbitMQInfo().updatesRoutingKey() + ".dlq";
 
     @Bean
     public Queue queue() {
         return QueueBuilder.durable(config.rabbitMQInfo().updateQueueName())
                 .deadLetterExchange(config.rabbitMQInfo().exchangeName())
-                .deadLetterRoutingKey(DLQ_ROUTING_KEY)
+                .deadLetterRoutingKey(config.rabbitMQInfo().updatesRoutingKey() + DLQ_SUFFIX)
                 .build();
     }
 

@@ -1,6 +1,5 @@
 package ru.tinkoff.edu.java.bot.configuration;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -8,18 +7,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@RequiredArgsConstructor
 public class RabbitMQConfiguration {
 
+    private static final String DLQ_SUFFIX = ".dlq";
+
     private final ApplicationConfig config;
-    private final String DLQ_ROUTING_KEY = config.rabbitMQInfo().updatesRoutingKey() + ".dlq";
-    private final String DLQ_NAME = config.rabbitMQInfo().updateQueueName() + ".dlq";
+    private final String dlqRoutingKey;
+
+    public RabbitMQConfiguration(ApplicationConfig config) {
+        this.config = config;
+        dlqRoutingKey = config.rabbitMQInfo().updatesRoutingKey() + DLQ_SUFFIX;
+    }
 
     @Bean
     public Queue queue() {
         return QueueBuilder.durable(config.rabbitMQInfo().updateQueueName())
                 .deadLetterExchange(config.rabbitMQInfo().exchangeName())
-                .deadLetterRoutingKey(DLQ_ROUTING_KEY)
+                .deadLetterRoutingKey(dlqRoutingKey)
                 .build();
     }
 
@@ -38,7 +42,7 @@ public class RabbitMQConfiguration {
 
     @Bean
     public Queue deadLetterQueue() {
-        return new Queue(DLQ_NAME);
+        return new Queue(config.rabbitMQInfo().updateQueueName() + DLQ_SUFFIX);
     }
 
     @Bean
@@ -46,7 +50,7 @@ public class RabbitMQConfiguration {
         return BindingBuilder
                 .bind(deadLetterQueue())
                 .to(directExchange())
-                .with(DLQ_ROUTING_KEY);
+                .with(dlqRoutingKey);
     }
 
     @Bean
